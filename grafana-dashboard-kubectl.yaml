@@ -14,7 +14,10 @@ data:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "-- Grafana --",
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
@@ -33,8 +36,8 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 27,
-      "iteration": 1653191511126,
+      "id": 28,
+      "iteration": 1653303983239,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -82,7 +85,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.4.6",
+          "pluginVersion": "8.5.0",
           "targets": [
             {
               "datasource": {
@@ -90,7 +93,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "sum(sum_over_time(carbonara_runner_carbon_from_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}[100y]))",
+              "expr": "sum(sum_over_time(carbonara_runner_carbon_from_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}[100y]))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
@@ -179,7 +182,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "interval": "",
               "legendFormat": "MOER Score",
               "refId": "A"
@@ -358,7 +361,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_carbon_from_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_carbon_from_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -445,7 +448,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_kwh_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_kwh_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{container}}",
@@ -626,7 +629,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_carbon_from_memory{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_carbon_from_memory{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -713,7 +716,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_kwh_memory{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_kwh_memory{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -923,7 +926,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_carbon_from_storage{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_carbon_from_storage{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -1012,7 +1015,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_kwh_storage{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_kwh_storage{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -1192,7 +1195,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_carbon_from_network_in{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_carbon_from_network_in{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -1279,7 +1282,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_kwh_network_in{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_kwh_network_in{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -1459,7 +1462,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_carbon_from_network_out{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_carbon_from_network_out{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -1546,7 +1549,7 @@ data:
                 "uid": "prometheus"
               },
               "exemplar": true,
-              "expr": "carbonara_runner_kwh_network_out{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
+              "expr": "carbonara_runner_kwh_network_out{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
@@ -1558,7 +1561,7 @@ data:
         }
       ],
       "refresh": "",
-      "schemaVersion": 35,
+      "schemaVersion": 36,
       "style": "dark",
       "tags": [
         "carbonara",
@@ -1645,6 +1648,54 @@ data:
             "options": [],
             "query": {
               "query": "label_values(kube_pod_container_info{job=\"kube-state-metrics\", namespace=\"$namespace\", container =\"$container\"}, pod)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 2,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": "",
+              "value": ""
+            },
+            "definition": "label_values(carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\"}, metric_location)",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "resource_location",
+            "options": [],
+            "query": {
+              "query": "label_values(carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\"}, metric_location)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 2,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": "us-west-1",
+              "value": "us-west-1"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values(carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\"}, current_node_location)",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "current_location",
+            "options": [],
+            "query": {
+              "query": "label_values(carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\"}, current_node_location)",
               "refId": "StandardVariableQuery"
             },
             "refresh": 2,
