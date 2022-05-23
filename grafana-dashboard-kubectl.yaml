@@ -34,7 +34,7 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 27,
-      "iteration": 1652485972991,
+      "iteration": 1653191511126,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -430,7 +430,7 @@ data:
           "options": {
             "legend": {
               "calcs": [],
-              "displayMode": "list",
+              "displayMode": "hidden",
               "placement": "bottom"
             },
             "tooltip": {
@@ -448,7 +448,7 @@ data:
               "expr": "carbonara_runner_kwh_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\"}",
               "hide": false,
               "interval": "",
-              "legendFormat": "Runner - {{ container }}",
+              "legendFormat": "Runner - {{container}}",
               "refId": "C"
             }
           ],
@@ -732,6 +732,7 @@ data:
               "custom": {
                 "axisLabel": "",
                 "axisPlacement": "auto",
+                "axisSoftMin": -2,
                 "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 0,
@@ -758,6 +759,8 @@ data:
                 }
               },
               "mappings": [],
+              "max": 1024000000,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -965,6 +968,8 @@ data:
                 }
               },
               "mappings": [],
+              "max": 1000,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1607,8 +1612,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "mytest",
-              "value": "mytest"
+              "text": "",
+              "value": ""
             },
             "definition": "label_values(kube_pod_container_info{job=\"kube-state-metrics\", namespace=\"$namespace\"}, container)",
             "hide": 0,
@@ -1629,8 +1634,8 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "mytest",
-              "value": "mytest"
+              "text": "",
+              "value": ""
             },
             "definition": "label_values(kube_pod_container_info{job=\"kube-state-metrics\", namespace=\"$namespace\", container =\"$container\"}, pod)",
             "hide": 0,
