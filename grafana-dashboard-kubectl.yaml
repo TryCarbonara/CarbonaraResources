@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-dashboards-carbonara-1
+  name: grafana-dashboards-carbonara
   namespace: carbonara-monitoring
   labels:
      grafana_dashboard: "1"
@@ -37,7 +37,7 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 28,
-      "iteration": 1653303983239,
+      "iteration": 1653502358263,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -103,6 +103,10 @@ data:
           "type": "stat"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -181,10 +185,13 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
+              "editorMode": "code",
               "exemplar": true,
               "expr": "carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
               "interval": "",
               "legendFormat": "MOER Score",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -278,100 +285,10 @@ data:
           "type": "timeseries"
         },
         {
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "stepBefore",
-                "lineStyle": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
-                },
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "tonnes"
-            },
-            "overrides": []
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
           },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 8,
-            "y": 6
-          },
-          "id": 3,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "hidden",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "exemplar": true,
-              "expr": "carbonara_runner_carbon_from_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Runner - {{ container }}",
-              "refId": "B"
-            }
-          ],
-          "title": "Carbonara Runner From Compute",
-          "type": "timeseries"
-        },
-        {
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -426,7 +343,7 @@ data:
           "gridPos": {
             "h": 8,
             "w": 8,
-            "x": 16,
+            "x": 8,
             "y": 6
           },
           "id": 4,
@@ -447,15 +364,115 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
+              "editorMode": "code",
               "exemplar": true,
               "expr": "carbonara_runner_kwh_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{container}}",
+              "range": true,
               "refId": "C"
             }
           ],
           "title": "KwH From Compute",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "tonnes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 6
+          },
+          "id": 3,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "hidden",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "carbonara_runner_carbon_from_compute{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Runner - {{ container }}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Carbonara Runner From Compute",
           "type": "timeseries"
         },
         {
@@ -546,100 +563,10 @@ data:
           "type": "timeseries"
         },
         {
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "stepBefore",
-                "lineStyle": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
-                },
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "tonnes"
-            },
-            "overrides": []
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
           },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 8,
-            "y": 14
-          },
-          "id": 6,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "table",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "exemplar": true,
-              "expr": "carbonara_runner_carbon_from_memory{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Runner - {{ container }}",
-              "refId": "B"
-            }
-          ],
-          "title": "Carbonara Runner From Memory",
-          "type": "timeseries"
-        },
-        {
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -694,7 +621,7 @@ data:
           "gridPos": {
             "h": 8,
             "w": 8,
-            "x": 16,
+            "x": 8,
             "y": 14
           },
           "id": 7,
@@ -715,15 +642,115 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
+              "editorMode": "code",
               "exemplar": true,
               "expr": "carbonara_runner_kwh_memory{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
+              "range": true,
               "refId": "C"
             }
           ],
           "title": "KwH From Memory",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "tonnes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 14
+          },
+          "id": 6,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "table",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "carbonara_runner_carbon_from_memory{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Runner - {{ container }}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Carbonara Runner From Memory",
           "type": "timeseries"
         },
         {
@@ -816,6 +843,106 @@ data:
           "type": "timeseries"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "stepBefore",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 1000,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "kwatth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 22
+          },
+          "id": 10,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "carbonara_runner_kwh_storage{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Runner - {{ container }}",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "KwH From Storage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -837,11 +964,7 @@ data:
                 },
                 "lineInterpolation": "stepBefore",
                 "lineStyle": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
+                  "fill": "solid"
                 },
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -904,7 +1027,7 @@ data:
           "gridPos": {
             "h": 8,
             "w": 8,
-            "x": 8,
+            "x": 16,
             "y": 22
           },
           "id": 9,
@@ -925,104 +1048,18 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
+              "editorMode": "code",
               "exemplar": true,
               "expr": "carbonara_runner_carbon_from_storage{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
+              "range": true,
               "refId": "B"
             }
           ],
           "title": "Carbonara Runner From Storage",
-          "type": "timeseries"
-        },
-        {
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "stepBefore",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "max": 1000,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "kwatth"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 16,
-            "y": 22
-          },
-          "id": 10,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "exemplar": true,
-              "expr": "carbonara_runner_kwh_storage{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Runner - {{ container }}",
-              "refId": "C"
-            }
-          ],
-          "title": "KwH From Storage",
           "type": "timeseries"
         },
         {
@@ -1130,12 +1167,99 @@ data:
                   "viz": false
                 },
                 "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "kwatth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 30
+          },
+          "id": 13,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "exemplar": true,
+              "expr": "carbonara_runner_kwh_network_in{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Runner - {{ container }}",
+              "refId": "C"
+            }
+          ],
+          "title": "KwH From Network (In)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
                 "lineStyle": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
+                  "fill": "solid"
                 },
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -1173,7 +1297,7 @@ data:
           "gridPos": {
             "h": 8,
             "w": 8,
-            "x": 8,
+            "x": 16,
             "y": 30
           },
           "id": 12,
@@ -1194,102 +1318,18 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
+              "editorMode": "code",
               "exemplar": true,
               "expr": "carbonara_runner_carbon_from_network_in{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
+              "range": true,
               "refId": "B"
             }
           ],
           "title": "Carbonara Runner From Network (In)",
-          "type": "timeseries"
-        },
-        {
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "kwatth"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 16,
-            "y": 30
-          },
-          "id": 13,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "exemplar": true,
-              "expr": "carbonara_runner_kwh_network_in{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Runner - {{ container }}",
-              "refId": "C"
-            }
-          ],
-          "title": "KwH From Network (In)",
           "type": "timeseries"
         },
         {
@@ -1397,12 +1437,99 @@ data:
                   "viz": false
                 },
                 "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "kwatth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 38
+          },
+          "id": 16,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "exemplar": true,
+              "expr": "carbonara_runner_kwh_network_out{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Runner - {{ container }}",
+              "refId": "C"
+            }
+          ],
+          "title": "KwH From Network (Out)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
                 "lineStyle": {
-                  "dash": [
-                    10,
-                    10
-                  ],
-                  "fill": "dash"
+                  "fill": "solid"
                 },
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -1440,7 +1567,7 @@ data:
           "gridPos": {
             "h": 8,
             "w": 8,
-            "x": 8,
+            "x": 16,
             "y": 38
           },
           "id": 15,
@@ -1461,102 +1588,18 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
+              "editorMode": "code",
               "exemplar": true,
               "expr": "carbonara_runner_carbon_from_network_out{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
+              "format": "table",
               "hide": false,
               "interval": "",
               "legendFormat": "Runner - {{ container }}",
+              "range": true,
               "refId": "B"
             }
           ],
           "title": "Carbonara Runner From Network (Out)",
-          "type": "timeseries"
-        },
-        {
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "kwatth"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 16,
-            "y": 38
-          },
-          "id": 16,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "exemplar": true,
-              "expr": "carbonara_runner_kwh_network_out{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\", metric_location=~\"$resource_location\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Runner - {{ container }}",
-              "refId": "C"
-            }
-          ],
-          "title": "KwH From Network (Out)",
           "type": "timeseries"
         }
       ],
@@ -1593,8 +1636,12 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "default",
-              "value": "default"
+              "text": "",
+              "value": ""
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
             },
             "definition": "label_values(kube_namespace_status_phase{job=\"kube-state-metrics\", namespace!=\"carbonara-monitoring\"}, namespace)",
             "hide": 0,
@@ -1618,6 +1665,10 @@ data:
               "text": "",
               "value": ""
             },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "definition": "label_values(kube_pod_container_info{job=\"kube-state-metrics\", namespace=\"$namespace\"}, container)",
             "hide": 0,
             "includeAll": false,
@@ -1640,6 +1691,10 @@ data:
               "text": "",
               "value": ""
             },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
             "definition": "label_values(kube_pod_container_info{job=\"kube-state-metrics\", namespace=\"$namespace\", container =\"$container\"}, pod)",
             "hide": 0,
             "includeAll": false,
@@ -1658,9 +1713,13 @@ data:
           },
           {
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "",
               "value": ""
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
             },
             "definition": "label_values(carbonara_runner_moer_score{cloud_provider=\"$cloudprovider\", instance=~\"$container\", pod=~\"$pod\", namespace=~\"$namespace\"}, metric_location)",
             "hide": 0,
@@ -1680,9 +1739,9 @@ data:
           },
           {
             "current": {
-              "selected": true,
-              "text": "us-west-1",
-              "value": "us-west-1"
+              "selected": false,
+              "text": "",
+              "value": ""
             },
             "datasource": {
               "type": "prometheus",
