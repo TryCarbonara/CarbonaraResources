@@ -51,7 +51,7 @@ spec:
     spec:
       serviceAccountName: carbonara-agent
       containers:
-      - image: saurabsa/carbonara-agent:v0.0.1
+      - image: carbonarahub/carbonara-agent:v0.0.1
         name: carbonara-agent
         imagePullPolicy: Always
         envFrom:
